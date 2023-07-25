@@ -13,10 +13,19 @@ const register = async(req, res) => {
         throw HttpError(409, "Email already exists / Такий емейл уже існує")
     } 
     const hashPassword = await bcrypt.hash(password, 10)
-    const newUser = await User.create({...req.body, password: hashPassword});
+    const newUser = await User.create({...req.body, password: hashPassword, token: ""});
+    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: "23h" });
+
+    newUser.token = token; // Assign the generated token to the user's token field
+
+    await newUser.save();
+
     res.status(201).json({
-        email: newUser.email,
-        name: newUser.name,
+        token,
+        user: {
+            email: newUser.email,
+            name: newUser.name,
+        }
     })
 }
 
