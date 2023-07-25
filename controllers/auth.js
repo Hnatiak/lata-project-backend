@@ -5,65 +5,21 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 
 const {SECRET_KEY} = process.env;
 
-// const register = async(req, res) => {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({email})
-
-//     if(user) {
-//         throw HttpError(409, "Email already exists / Такий емейл уже існує")
-//     } 
-
-//     const { _id: id } = newUser;
-
-//     const payload = {
-//       id,
-//     }; 
-
-//     const hashPassword = await bcrypt.hash(password, 10)
-
-//     const newUser = await User.create({...req.body, password: hashPassword});
-
-//     const token = jwt.sign(payload, SECRET_KEY, {expiresIn: "23h"});
-
-//     await User.findByIdAndUpdate(id, { token });
-
-//     res.status(201).json({
-//         token,
-//         user: {
-//             email: newUser.email,
-//             name: newUser.name,
-//         }
-//     })
-// }
-
-const register = async (req, res) => {
+const register = async(req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ email })
+    const user = await User.findOne({email})
 
-    if (user) {
+    if(user) {
         throw HttpError(409, "Email already exists / Такий емейл уже існує")
-    }
+    } 
 
     const hashPassword = await bcrypt.hash(password, 10)
 
-    const newUser = await User.create({ ...req.body, password: hashPassword });
-
-    const { _id: id } = newUser;
-
-    const payload = {
-        id,
-    };
-
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
-
-    await User.findByIdAndUpdate(id, { token });
+    const newUser = await User.create({...req.body, password: hashPassword});
 
     res.status(201).json({
-        token,
-        user: {
-            email: newUser.email,
-            name: newUser.name,
-        }
+        email: newUser.email,
+        name: newUser.name,
     })
 }
 
