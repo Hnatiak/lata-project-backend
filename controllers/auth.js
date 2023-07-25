@@ -51,6 +51,10 @@ const login = async(req, res) => {
 
     res.json({
         token,
+        user: {
+            name: user.name,
+            email: user.email,
+        },
     })
 }
 
@@ -58,7 +62,7 @@ const getCurrent = async(req, res) => {
     const {email, name} = req.user;
 
     res.json({
-        email, 
+        email,
         name,
     })
 }
