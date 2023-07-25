@@ -20,10 +20,11 @@ const userSchema = new Schema({
         minlength: 8,
         require: true,
     },
-    token: {
-        type: String,
-        default: "",
-    }
+    // token: {
+    //     type: String,
+    //     default: "",
+    // }
+    token: String,
 }, {versionKey: false, timestamps: true});
 
 userSchema.post("save", handleMongooseError);
