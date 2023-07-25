@@ -1,31 +1,26 @@
-require('dotenv').config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
-const { User } = require('../models/user');
+const {User} = require('../models/user');
 const { HttpError, ctrlWrapper } = require("../helpers");
-// const {SECRET_KEY} = process.env;
 
+const {SECRET_KEY} = process.env;
 
 const register = async(req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({email})
+
     if(user) {
         throw HttpError(409, "Email already exists / Такий емейл уже існує")
     } 
+
     const hashPassword = await bcrypt.hash(password, 10)
-    const newUser = await User.create({...req.body, password: hashPassword, token: ""});
 
-    console.log("SECRET_KEY: ", process.env.SECRET_KEY);
-    const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, { expiresIn: "23h" });
+    const newUser = await User.create({...req.body, password: hashPassword});
 
-    newUser.token = token; // Assign the generated token to the user's token field
-
-    await newUser.save();
-
-    // await User.findByIdAndUpdate(id, { token });
+    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: "23h" });
 
     res.status(201).json({
-        token,
+        token, 
         user: {
             email: newUser.email,
             name: newUser.name,
