@@ -17,10 +17,7 @@ const register = async(req, res) => {
 
     const newUser = await User.create({...req.body, password: hashPassword});
 
-    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: "23h" });
-
     res.status(201).json({
-        token,
         email: newUser.email,
         name: newUser.name,
     })

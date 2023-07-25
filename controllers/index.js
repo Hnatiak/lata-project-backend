@@ -1,7 +1,4 @@
-const { registerUser, 
-    // loginUser, 
-    // logoutUser 
-} = require("./auth");
+const { registerUser, loginUser, logoutUser } = require("./auth/index");
 
 // const {
 //   currentUser,
@@ -30,27 +27,6 @@ const { registerUser,
 
 module.exports = {
   registerUser,
-//   loginUser,
-//   currentUser,
-//   logoutUser,
-//   updateTheme,
-//   updateUser,
-//   updateActiveBoard,
-//   sendHelpEmail,
-
-//   getBoard,
-//   getBoardById,
-//   addBoard,
-//   updateBoard,
-//   removeBoard,
-
-//   getColumn,
-//   addColumn,
-//   updateColumn,
-//   removeColumn,
-
-//   getCard,
-//   addCard,
-//   updateCard,
-//   removeCard,
+  loginUser,
+  logoutUser,
 };
