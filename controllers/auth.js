@@ -15,19 +15,16 @@ const register = async(req, res) => {
 
     const hashPassword = await bcrypt.hash(password, 10)
 
-    const newUser = await User.create({...req.body, password: hashPassword, token: "",});
+    const newUser = await User.create({...req.body, password: hashPassword});
 
-    const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: "23h" });
-    newUser.token = token; // Assign the generated token to the user's token field
-
-    await newUser.save(); // Save the user with the token field
+    // const token = jwt.sign({ id: newUser._id }, SECRET_KEY, { expiresIn: "23h" });
 
     res.status(201).json({
-        token, 
-        user: {
+        // token, 
+        // user: {
             email: newUser.email,
             name: newUser.name,
-        }
+        // }
     })
 }
 
