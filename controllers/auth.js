@@ -1,8 +1,8 @@
+require('dotenv').config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
-const {User} = require('../models/user');
+const { User } = require('../models/user');
 const { HttpError, ctrlWrapper } = require("../helpers");
-require("dotenv").config();
 // const {SECRET_KEY} = process.env;
 
 
@@ -15,7 +15,7 @@ const register = async(req, res) => {
     const hashPassword = await bcrypt.hash(password, 10)
     const newUser = await User.create({...req.body, password: hashPassword, token: ""});
 
-    console.log("SECRET_KEY:", process.env.SECRET_KEY);
+    console.log("SECRET_KEY: ", process.env.SECRET_KEY);
     const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, { expiresIn: "23h" });
 
     newUser.token = token; // Assign the generated token to the user's token field
