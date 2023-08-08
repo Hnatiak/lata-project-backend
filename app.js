@@ -6,6 +6,8 @@ require("dotenv").config()
 const authRouter = require("./routes/api/auth")
 const boxsRouter = require('./routes/api/boxs')
 const reviewRouter = require('./routes/api/reviews');
+// const stripe = require("./models/stripe")
+
 
 const app = express()
 
@@ -18,6 +20,7 @@ app.use(express.json())
 app.use("/api/auth", authRouter)
 app.use('/api/boxs', boxsRouter)
 app.use('/api/reviews', reviewRouter);
+// app.use('/api/stripe', stripe);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })

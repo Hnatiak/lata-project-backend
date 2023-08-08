@@ -1,4 +1,5 @@
 const { registerUser, loginUser, logoutUser } = require("./auth/index");
+// const sendHelpEmail = require("./sendHelpEmail");
 
 // const {
 //   currentUser,

@@ -40,9 +40,22 @@ const loginSchema = Joi.object({
     password: Joi.string().min(8).required(),
 });
 
+const sendHelpEmailSchema = Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().pattern(emailRegexp).required().messages({
+      "string.pattern.base": "Email must be a valid email address",
+      "any.required": "Email is required",
+    }),
+    message: Joi.string().min(10).required().messages({
+      "string.min": "Please, explain your problem in more detail",
+      "any.required": "Describe your problem",
+    }),
+});
+
 const schemas = {
     registerSchema,
     loginSchema,
+    sendHelpEmailSchema,
 };
 
 const User = model("user", userSchema)
