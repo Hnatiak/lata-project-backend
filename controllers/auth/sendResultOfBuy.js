@@ -4,7 +4,7 @@ require('dotenv').config();
 const { META_EMAIL } = process.env;
 
 const sendResultOfBuy = async (req, res) => {
-  const { name, surname, email, phone, address, paymentMethod, quantity, comment } = req.body;
+  const { name, surname, email, nameOfBox, sum, phone, address, paymentMethod, quantity, comment } = req.body;
 
   try {
     const letter = `<p><span style="font-weight: 700;">Ім'я: </span>${name}</p>
@@ -14,6 +14,8 @@ const sendResultOfBuy = async (req, res) => {
     <p><span style="font-weight: 700;">Адреса доставки: </span>${address}</p>
     <p><span style="font-weight: 700;">Метод розрахунку: </span>${paymentMethod}</p>
     <p><span style="font-weight: 700;">Кількість: </span>${quantity}</p>
+    <p><span style="font-weight: 700;">Назва коробки: </span>${nameOfBox}</p>
+    <p><span style="font-weight: 700;">Сума: </span>${sum} грн</p>
     ${comment ? `<p><span style="font-weight: 700;">Коментар: </span>${comment}</p>` : ''}`;
 
     const dataEmail = {
