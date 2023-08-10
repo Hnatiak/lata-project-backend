@@ -9,10 +9,10 @@ const buySchema = new Schema({
     type: String,
     required: true,
   },
-  surname: {
-    type: String,
-    required: true,
-  },
+//   surname: {
+//     type: String,
+//     required: true,
+//   },
   email: {
     type: String,
     match: emailRegexp,
@@ -48,9 +48,9 @@ const buySchema = new Schema({
 
 const buyValidationSchema = Joi.object({
 //   name: Joi.string().required(),
-  name: Joi.string().regex(/^\S*$/).required(),
+  name: Joi.string().required(),
 //   surname: Joi.string().required(),
-  surname: Joi.string().regex(/^\S*$/).required(),
+//   surname: Joi.string().regex(/^\S*$/).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
   address: Joi.string().required(),
