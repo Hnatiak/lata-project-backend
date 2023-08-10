@@ -14,12 +14,12 @@ const sendHelpEmail = async (req, res) => {
   const dataEmail = {
     html: letter,
     to: META_EMAIL,
-    subject: "Needing technical support",
+    subject: "Потрібна допомога",
   };
 
   await sendEmail(dataEmail);
   res.json({
-    message: "begging for help email sent ",
+    message: "Лист про допомогу надіслано успішно",
   });
 };
 
