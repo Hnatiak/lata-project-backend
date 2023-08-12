@@ -58,7 +58,7 @@ const buyValidationSchema = Joi.object({
   sum: Joi.number().required(),
   paymentMethod: Joi.string().valid('карточка', 'готівка').required(),
   quantity: Joi.number().integer().required(),
-  message: Joi.string(),
+  message: Joi.string().allow('').optional(),
 });
 
 const buySchemasForPay = {
