@@ -11,7 +11,7 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comment: {
+  message: {
     type: String,
     required: true,
   },
@@ -27,7 +27,7 @@ const emailRegexp = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/; // Перекона
 const reviewPostSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  comment: Joi.string().required(),
+  message: Joi.string().required(),
 });
 
 const schemas = {
