@@ -3,6 +3,12 @@ const { Schema, model } = require("mongoose");
 const Joi = require('joi'); // Переконайтеся, що ви підключили пакет Joi і встановили його
 
 const reviewSchema = new mongoose.Schema({
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
   name: {
     type: String,
     required: true,
@@ -28,6 +34,7 @@ const reviewPostSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
   comment: Joi.string(),
+  rating: Joi.number().min(1).max(5).required(),
 });
 
 const schemas = {
