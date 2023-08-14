@@ -36,7 +36,7 @@ const buySchema = new Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ['карточка', 'готівка'],
+    enum: ['карточка', 'отримати рахунок', 'готівка'],
     required: true,
   },
   quantity: {
@@ -56,7 +56,7 @@ const buyValidationSchema = Joi.object({
   address: Joi.string().required(),
   nameOfBox: Joi.string().required(),
   sum: Joi.number().required(),
-  paymentMethod: Joi.string().valid('карточка', 'готівка').required(),
+  paymentMethod: Joi.string().valid('карточка', 'отримати рахунок','готівка').required(),
   quantity: Joi.number().integer().required(),
   message: Joi.string().allow('').optional(),
 });

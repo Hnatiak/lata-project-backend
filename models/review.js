@@ -13,7 +13,13 @@ const reviewSchema = new mongoose.Schema({
   },
   comment: {
     type: String,
+    required: false,
+  },
+  rating: { // Додано поле оцінки
+    type: Number,
     required: true,
+    min: 1,
+    max: 5,
   },
   owner: {
     type: Schema.Types.ObjectId,
@@ -27,7 +33,8 @@ const emailRegexp = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/; // Перекона
 const reviewPostSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  comment: Joi.string().required(),
+  comment: Joi.string(),
+  rating: Joi.number().integer().min(1).max(5).required(),
 });
 
 const schemas = {

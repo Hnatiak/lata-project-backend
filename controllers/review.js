@@ -33,7 +33,7 @@ const getReviews = async (req, res) => {
       }
   
       review.name = name;
-      review.email = email;
+      // review.email = email;
       review.comment = comment;
       const updatedReview = await review.save();
       res.json(updatedReview);
