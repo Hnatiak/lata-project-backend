@@ -3,12 +3,6 @@ const { Schema, model } = require("mongoose");
 const Joi = require('joi'); // Переконайтеся, що ви підключили пакет Joi і встановили його
 
 const reviewSchema = new mongoose.Schema({
-  rating: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 5,
-  },
   name: {
     type: String,
     required: true,
@@ -21,12 +15,6 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  // rating: { // Додано поле оцінки
-  //   type: Number,
-  //   required: true,
-  //   min: 1,
-  //   max: 5,
-  // },
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user", // Назва колекції
@@ -37,11 +25,9 @@ const reviewSchema = new mongoose.Schema({
 const emailRegexp = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/; // Переконайтеся, що ви маєте змінну emailRegexp
 
 const reviewPostSchema = Joi.object({
-  rating: Joi.number().integer().min(1).max(5).required(),
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  message: Joi.string(),
-  // rating: Joi.number().integer().min(1).max(5).required(),
+  comment: Joi.string(),
 });
 
 const schemas = {
