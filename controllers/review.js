@@ -16,32 +16,6 @@ const getReviews = async (req, res) => {
     res.status(201).json(result);
   };
 
-
-  const editReview = async (req, res) => {
-    const owner = req.params.id;
-    const { name, email, comment } = req.body;
-    
-    try {
-      const review = await Review.findById(owner);
-      if (!review) {
-        throw new Error('Відгук не знайдено');
-      }
-  
-      // Check if the authenticated user is the owner of the review
-      if (review.owner.toString() !== req.user._id.toString()) {
-        throw new Error('У вас немає дозволу на редагування цього відгуку');
-      }
-  
-      review.name = name;
-      // review.email = email;
-      review.comment = comment;
-      const updatedReview = await review.save();
-      res.json(updatedReview);
-    } catch (error) {
-      res.status(400).json({ message: error.message });
-    }
-  };
-
 const deleteReview = async (req, res) => {
     const reviewId = req.params.id;
   
@@ -68,6 +42,5 @@ const deleteReview = async (req, res) => {
 module.exports = {
   getReviews,
   addReview,
-  editReview,
   deleteReview,
 };

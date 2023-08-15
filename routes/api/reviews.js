@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.get("/", ctrl.getReviews);
 router.post("/", authenticate, ctrl.addReview); // validateBody(schemas.addSchema),
-router.put("/:id", authenticate, isValidId, ctrl.editReview); // validateBody(schemas.putSchema),
 router.delete("/:id", authenticate, isValidId, ctrl.deleteReview);
 
 module.exports = router;
