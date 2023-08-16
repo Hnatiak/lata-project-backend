@@ -14,7 +14,7 @@ router.post("/login", validateBody(schemas.loginSchema), ctrl.login); // signin
 router.get("/current", authenticate, ctrl.getCurrent);
 router.post("/logout", authenticate, ctrl.logout);
 router.get("/google", passport.authenticate("google", {scope: ["email", "profile"]}))
-router.get("/google/callback", passport.authenticate("google", { session: false }), ctrl.googleAuth);
+// router.get("/google/callback", passport.authenticate("google", { session: false }), ctrl.googleAuth);
 // router.post("/help", validateBody(schemas.sendHelpEmailSchema), schemas.sendHelpEmail);
 router.post("/help", validateBody(schemas.sendHelpEmailSchema), sendHelpEmail);
 router.post("/buy", validateBody(buySchemasForPay.buyValidationSchema), sendResultOfBuy);
