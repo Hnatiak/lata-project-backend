@@ -105,7 +105,8 @@ const googleAuth = async (req, res) => {
     await User.findByIdAndUpdate(id, { accessToken, refreshToken });
 
     res.redirect(
-        `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+        // `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+        `http://localhost:3000/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
     );
 };
 
