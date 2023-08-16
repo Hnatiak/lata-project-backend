@@ -94,9 +94,25 @@ const logout = async(req, res) => {
 //       `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}&name=${encodeURIComponent(name)}`
 //     );
 //   };
+// const googleAuth = async (req, res) => {
+//     const { _id: id } = req.user;
+//     const accessToken = jwt.sign({ id }, process.env.ACCESS_SECRET_KEY, {
+//         expiresIn: "2m",
+//     });
+//     const refreshToken = jwt.sign({ id }, process.env.REFRESH_SECRET_KEY, {
+//         expiresIn: "7d",
+//     });
+//     await User.findByIdAndUpdate(id, { accessToken, refreshToken });
+
+//     res.redirect(
+//         // `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+//         `http://localhost:3000/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+//     );
+// };
+
 const googleAuth = async (req, res) => {
-    const { _id: id } = req.user;
-    const accessToken = jwt.sign({ id }, process.env.ACCESS_SECRET_KEY, {
+    const { _id: id, name, email } = req.user;
+    const accessToken = jwt.sign({ id }, process.env.SECRET_KEY, {
         expiresIn: "2m",
     });
     const refreshToken = jwt.sign({ id }, process.env.REFRESH_SECRET_KEY, {
@@ -105,8 +121,7 @@ const googleAuth = async (req, res) => {
     await User.findByIdAndUpdate(id, { accessToken, refreshToken });
 
     res.redirect(
-        // `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
-        `http://localhost:3000/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+        `http://localhost:3000/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
     );
 };
 
