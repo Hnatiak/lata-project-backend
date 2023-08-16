@@ -24,15 +24,15 @@ const googleCallback = async ( req, accessToken, refreshToken, profile, done ) =
 
     const password = await bcrypt.hash(nanoid(), 10);
     // const avatarURL = picture;
-    // const verificationCode = "";
-    // const verify = true;
+    const verificationCode = "";
+    const verify = true;
 
     const newUser = await User.create({
       email,
       password,
       name: displayName,
-    //   verificationCode,
-    //   verify,
+      verificationCode,
+      verify,
     });
     done(null, newUser);
   } catch (error) {
