@@ -11,7 +11,6 @@ const googleParams = {
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: `${BASE_URL}/api/auth/google/callback`,
   passReqToCallback: true,
-  scope: ["profile", "email"],
 };
 
 const googleCallback = async ( req, accessToken, refreshToken, profile, done ) => {

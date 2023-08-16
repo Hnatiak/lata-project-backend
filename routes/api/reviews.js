@@ -6,7 +6,7 @@ const {schemas} = require("../../models/review")
 const router = express.Router();
 
 router.get("/", ctrl.getReviews);
-router.post("/", authenticate, ctrl.addReview); // validateBody(schemas.addSchema),
+router.post("/", authenticate, validateBody(schemas.reviewPostSchema), ctrl.addReview); // validateBody(schemas.addSchema),
 router.delete("/:id", authenticate, isValidId, ctrl.deleteReview);
 
 module.exports = router;

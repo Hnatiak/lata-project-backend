@@ -77,7 +77,7 @@ const logout = async(req, res) => {
 }
 
 const googleAuth = async (req, res) => {
-    const { _id: id, name } = req.user;
+    const { _id: id } = req.user;
     const payload = {
       id,
     };
