@@ -4,13 +4,13 @@ const passport = require("passport");
 const { Strategy } = require("passport-google-oauth2");
 const { User } = require("../models/user");
 const bcrypt = require("bcrypt");
-// const nanoid = require("nanoid");
 
 const googleParams = {
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: `${BASE_URL}/api/auth/google/callback`,
+  callbackURL: `${BASE_URL}/auth/google/callback`,
   passReqToCallback: true,
+  scope: ["profile", "email"],
 };
 
 const googleCallback = async (
@@ -21,7 +21,7 @@ const googleCallback = async (
   done
 ) => {
   try {
-    const { email, displayName } = profile;
+    const { email, displayName } = profile; // , picture
     const user = await User.findOne({ email });
     if (user) {
       return done(null, user);
