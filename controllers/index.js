@@ -1,4 +1,4 @@
-const { registerUser, loginUser, logoutUser } = require("./auth/index");
+const { registerUser, loginUser, logoutUser, passport } = require("./auth/index");
 // const sendHelpEmail = require("./sendHelpEmail");
 
 // const {
@@ -30,4 +30,5 @@ module.exports = {
   registerUser,
   loginUser,
   logoutUser,
+  passport,
 };

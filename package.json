@@ -23,7 +23,11 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.0",
     "morgan": "^1.10.0",
+    "nanoid": "^4.0.2",
     "nodemailer": "^6.9.4",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-oauth2": "^1.7.0",
     "requests": "^0.3.0",
     "stripe": "^12.14.0",
     "uuid": "^9.0.0"

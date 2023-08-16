@@ -76,9 +76,29 @@ const logout = async(req, res) => {
     })
 }
 
+const googleAuth = async (req, res) => {
+    const { _id: id } = req.user;
+    const payload = {
+      id,
+    };
+  
+    const accessToken = jwt.sign(payload, ACCESS_SECRET_KEY, {
+      expiresIn: "2m",
+    });
+    const refreshToken = jwt.sign(payload, REFRESH_SECRET_KEY, {
+      expiresIn: "7d",
+    });
+    await User.findByIdAndUpdate(id, { accessToken, refreshToken });
+  
+    res.redirect(
+      `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
+    );
+  };
+
 module.exports = {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
     getCurrent: ctrlWrapper(getCurrent),
     logout: ctrlWrapper(logout),
+    googleAuth: ctrlWrapper(googleAuth),
 }
