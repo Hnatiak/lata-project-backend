@@ -76,24 +76,38 @@ const logout = async(req, res) => {
     })
 }
 
+// const googleAuth = async (req, res) => {
+//     const { _id: id, name } = req.user;
+//     const payload = {
+//       id,
+//     };
+  
+//     const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET_KEY, {
+//       expiresIn: "2m",
+//     });
+//     const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET_KEY, {
+//       expiresIn: "7d",
+//     });
+//     await User.findByIdAndUpdate(id, { accessToken, refreshToken });
+
+//     res.redirect(
+//       `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}&name=${encodeURIComponent(name)}`
+//     );
+//   };
 const googleAuth = async (req, res) => {
     const { _id: id } = req.user;
-    const payload = {
-      id,
-    };
-  
-    const accessToken = jwt.sign(payload, process.env.ACCESS_SECRET_KEY, {
-      expiresIn: "2m",
+    const accessToken = jwt.sign({ id }, process.env.ACCESS_SECRET_KEY, {
+        expiresIn: "2m",
     });
-    const refreshToken = jwt.sign(payload, process.env.REFRESH_SECRET_KEY, {
-      expiresIn: "7d",
+    const refreshToken = jwt.sign({ id }, process.env.REFRESH_SECRET_KEY, {
+        expiresIn: "7d",
     });
     await User.findByIdAndUpdate(id, { accessToken, refreshToken });
-  
+
     res.redirect(
-      `https://hnatiak.github.io/lata-project-frontend/`
+        `https://hnatiak.github.io/lata-project-frontend/?accessToken=${accessToken}&refreshToken=${refreshToken}`
     );
-  };
+};
 
 module.exports = {
     register: ctrlWrapper(register),
