@@ -11,6 +11,7 @@ const router = express.Router()
 
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register); // signup
 router.post("/login", validateBody(schemas.loginSchema), ctrl.login); // signin
+// router.post("/refresh", validateBody(schemas.refreshSchema), ctrl.refresh); // refresh
 router.get("/current", authenticate, ctrl.getCurrent);
 router.post("/logout", authenticate, ctrl.logout);
 router.get("/google", passport.authenticate("google", {scope: ["email", "profile"]}))

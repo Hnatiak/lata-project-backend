@@ -20,6 +20,12 @@ const userSchema = new Schema({
         minlength: 8,
         require: true,
     },
+    // accessToken: {
+    //     type: String,
+    // },
+    // refreshToken: {
+    //     type: String,
+    // },
     // token: {
     //     type: String,
     //     default: "",
@@ -40,6 +46,10 @@ const loginSchema = Joi.object({
     password: Joi.string().min(8).required(),
 });
 
+// const refreshSchema = Joi.object({
+//     refreshToken: Joi.string().required(),
+// });
+
 const sendHelpEmailSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().pattern(emailRegexp).required().messages({
@@ -55,6 +65,7 @@ const sendHelpEmailSchema = Joi.object({
 const schemas = {
     registerSchema,
     loginSchema,
+    // refreshSchema,
     sendHelpEmailSchema,
 };
 
